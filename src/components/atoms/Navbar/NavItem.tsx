@@ -5,13 +5,27 @@ interface navItemProps {
   icon: IconType;
   goTo: string;
   label: string;
+  activeNav: string;
+  setActiveNav: (goTo: string) => void;
 }
 
-const NavItem = ({ goTo, icon: Icon, label }: navItemProps) => {
+const NavItem = ({
+  goTo,
+  icon: Icon,
+  label,
+  activeNav,
+  setActiveNav,
+}: navItemProps) => {
   return (
     <>
       <li className="nav__item">
-        <a href={goTo} className="nav__link">
+        <a
+          href={goTo}
+          onClick={() => {
+            setActiveNav(goTo);
+          }}
+          className={`nav__link ${activeNav === goTo ? "active-link" : ""}`}
+        >
           <Icon /> {label}
         </a>
       </li>
